@@ -96,4 +96,9 @@ class User extends Authenticatable implements MustVerifyEmail
             'doctor_tagline',
         );
     }
+
+    public function appoinments()
+    {
+        return $this->hasMany(Appointment::class);
+    }
 }

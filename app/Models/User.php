@@ -26,7 +26,24 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'name',
         'email',
+        'phone',
+        'gender',
+        'role',
+        'address',
         'password',
+        'profile_photo_path',
+        'doctor_profession',
+        'doctor_speciality',
+        'doctor_conditions',
+        'doctor_experience',
+        'social_links',
+        'doctor_memberships',
+        'doctor_awards',
+        'doctor_education',
+        'doctor_biography',
+        'doctor_research_interests',
+        'doctor_tagline',
+        'doctor_department',
     ];
 
     /**
@@ -48,6 +65,10 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'social_links' => 'array',
+        'doctor_memberships' => 'array',
+        'doctor_awards' => 'array',
+        'doctor_education' => 'array',
     ];
 
     /**
@@ -58,4 +79,21 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function scopeDoctorFields($query)
+    {
+        $query->select(
+            'doctor_profession',
+            'doctor_speciality',
+            'doctor_conditions',
+            'doctor_experience',
+            'social_links',
+            'doctor_memberships',
+            'doctor_awards',
+            'doctor_education',
+            'doctor_biography',
+            'doctor_research_interests',
+            'doctor_tagline',
+        );
+    }
 }

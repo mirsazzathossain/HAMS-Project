@@ -22,6 +22,10 @@
                             </div>
 
                             <div class="form-group">
+                                <input id="phone" name="phone" type="tel" placeholder="Phone" :value="old('phone')" required>
+                            </div>
+
+                            <div class="form-group">
                                 <input id="password" name="password" type="password" placeholder="Password" required autocomplete="new-password">
                             </div>
                             

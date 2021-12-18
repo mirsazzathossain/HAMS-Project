@@ -74,7 +74,15 @@
                                 @if (Route::has('login'))
                                     @auth
                                         <li class="nav-item">
-                                            <a class="{{ request()->is('dashboard') ? 'active':'' }}" href="{{ url('/dashboard') }}">Dashboard</a>
+                                            <a class="{{ request()->is('patient.appointments') ? 'active':'' }}" href="{{ route('patient.appointments') }}">Appointments</a>
+                                        </li>
+                                        @if(Auth::user()->role == 'admin' || Auth::user()->role == 'doctor')
+                                            <li class="nav-item">
+                                                <a class="{{ request()->is('dashboard.index') ? 'active':'' }}" href="{{ route('dashboard.index') }}">Dashboard</a>
+                                            </li>
+                                        @endif
+                                        <li class="nav-item">
+                                            <a class="{{ request()->is('profile.show') ? 'active':'' }}" href="{{ route('profile.show') }}">Profile</a>
                                         </li>
                                         <li class="nav-item">
                                             <form method="POST" action="{{ route('logout') }}">

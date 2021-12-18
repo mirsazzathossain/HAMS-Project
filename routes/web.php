@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\HospitalController;
 use App\Http\Livewire\About;
 use App\Http\Livewire\BookAppoinment;
 use App\Http\Livewire\Contact;
@@ -10,7 +13,6 @@ use App\Http\Livewire\Doctors;
 use App\Http\Livewire\Home;
 use App\Http\Livewire\MailSuccess;
 use App\Http\Livewire\ShowAppoinment;
-use App\Models\Appointment;
 use Illuminate\Support\Facades\Route;
 
 
@@ -21,14 +23,10 @@ Route::get('/about-us', About::class)->name('about-us');
 Route::get('/doctor/{id}', Details::class)->name('doctor.details');
 Route::get('/mail-success', MailSuccess::class)->name('mail-success');
 
-Route::group(['prefix' => 'admin', 'middleware' =>['auth:sanctum', 'verified']], function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+Route::group(['prefix' => 'admin', 'middleware' =>['auth:sanctum', 'verified', 'auth.admin']], function () {
+    Route::resource('dashboard', DashboardController::class)->only(['index']);
 
-    Route::get('/add-doctor', function(){
-        return view('components.add-doctor');
-    })->name('admin.add-doctor');
+    Route::get('/add-doctor', [DoctorController::class, 'view'])->name('admin.add-doctor');
     Route::post('/add-doctor', [DoctorController::class, 'addDoctor']);
 
     Route::get('/update-doctor/{id}', [DoctorController::class, 'fetchDoctor'])->name('admin.update-doctor');
@@ -43,6 +41,9 @@ Route::group(['prefix' => 'admin', 'middleware' =>['auth:sanctum', 'verified']],
     Route::get('/update-appointment/{id}', [AppointmentController::class, 'fetchAppointment'])->name('admin.update-appointment');
     Route::post('/update-appointment', [AppointmentController::class, 'updateAppointment']);
     Route::post('/delete-appointment', [AppointmentController::class, 'deleteAppointment'])->name('admin.delete-appointment');
+
+    Route::resource('departments', DepartmentController::class)->except(['show']);
+    Route::resource('hospitals', HospitalController::class)->only(['index', 'update']);
 });
 
 Route::group(['prefix' => 'patient', 'middleware' => ['auth:sanctum', 'verified']], function () {

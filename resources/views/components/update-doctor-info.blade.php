@@ -4,6 +4,13 @@
             <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"> Update Doctor </h2>
             <!-- General elements -->
             <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300"> Update doctor informations </h4>
+
+            @if (session('success'))
+                <div class="flex items-center bg-blue-500 text-white text-sm font-bold px-4 py-3" role="alert">
+                    <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z"/></svg>
+                    <p>{{ session('success') }}</p>
+                </div>
+            @endif
             <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
                 <form action="/admin/update-doctor" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -60,36 +67,15 @@
                     <label class="block mt-4 text-sm">
                         <span class="text-gray-700 dark:text-gray-400"> Department </span>
                         <select name="department" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
-                            @if (strcmp($doctor['doctor_department'], '1') == 0)  
-                                <option value="1" selected>General Surgery</option>
-                            @else
-                                <option value="1">General Surgery</option>
-                            @endif
-                            @if (strcmp($doctor['doctor_department'], '2') == 0)  
-                                <option value="2" selected>Gastroenterology</option>
-                            @else
-                                <option value="2">Gastroenterology</option>
-                            @endif
-                            @if (strcmp($doctor['doctor_department'], '3') == 0)  
-                                <option value="3" selected>Nutrition &amp; Dietetics</option>
-                            @else
-                                <option value="3">Nutrition &amp; Dietetics</option>
-                            @endif
-                            @if (strcmp($doctor['doctor_department'], '4') == 0)  
-                                <option value="4" selected>Cardiology</option>
-                            @else
-                                <option value="4">Cardiology</option>
-                            @endif
-                            @if (strcmp($doctor['doctor_department'], '5') == 0)  
-                                <option value="5" selected>Neurology</option>
-                            @else
-                                <option value="5">Neurology</option>
-                            @endif
-                            @if (strcmp($doctor['doctor_department'], '6') == 0)  
-                                <option value="6" selected>Pediatric</option>
-                            @else
-                                <option value="6">Pediatric</option>
-                            @endif
+                            <option value="none" selected="" disabled="">Department</option>
+                            @foreach ($departments as $department)
+                                @if (strcmp($doctor['department_id'], $department->id ) == 0)  
+                                    <option value="{{ $department->id }}" selected>{{ $department->department_name }}</option>
+                                @else
+                                    <option value="{{ $department->id }}">{{ $department->department_name }}</option>
+                                @endif
+                            @endforeach
+                            
                         </select>
                     </label>
 
@@ -146,6 +132,11 @@
                     <label class="block mt-4 text-sm">
                         <span class="text-gray-700 dark:text-gray-400">Social Links (Seperated by comma)</span>
                         <textarea name="social_links" type="text"  placeholder="Enter Social Links" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-textarea focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" rows="3" placeholder="Enter some long form content.">{{implode(', ', $doctor['social_links'])}}</textarea>
+                    </label>
+
+                    <label class="block mt-4 text-sm">
+                        <span class="text-gray-700 dark:text-gray-400">Schedule (Seperated by comma. Ex: Mon-Tue 8:30-12:30,Wed-Thu 12:30-20:30, Friday 8:30-12:00 )</span>
+                        <textarea name="schedule" type="text" placeholder="Enter Schedule" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-textarea focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" rows="3" placeholder="Enter some long form content.">{{implode(', ', $doctor['doctor_schedule'])}}</textarea>
                     </label>
 
                     <label class="block mt-4 text-sm">

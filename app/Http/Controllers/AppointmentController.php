@@ -88,7 +88,7 @@ class AppointmentController extends Controller
     {
         $doctors = DB::table('users')
             ->select('id', 'name')
-            ->where('doctor_department', $request->department)
+            ->where('department_id', $request->department)
             ->get();
         
         if (count($doctors) > 0) {

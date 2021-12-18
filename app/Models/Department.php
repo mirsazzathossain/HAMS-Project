@@ -12,4 +12,9 @@ class Department extends Model
     protected $fillable = [
         'department_name',
     ];
+
+    function doctors()
+    {
+        return $this->hasMany(User::class);
+    }
 }

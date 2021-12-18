@@ -36,7 +36,7 @@
                             
                             @foreach ($departments as $department)
 
-                                @if (strcmp($appoinment->doctor['doctor_department'], $department->id) == 0)  
+                                @if (strcmp($appoinment->doctor['department_id'], $department->id) == 0)  
                                     <option value="{{ $department->id }}" selected>{{ $department->department_name }}</option>
                                 @else
                                     <option value="{{ $department->id }}">{{ $department->department_name }}</option>

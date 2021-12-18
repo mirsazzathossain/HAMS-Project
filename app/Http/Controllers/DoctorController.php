@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class DoctorController extends Controller
@@ -51,10 +52,11 @@ class DoctorController extends Controller
                 'doctor_biography' => $request->biography,
                 'doctor_research_interests' => $request->research_interests,
                 'doctor_tagline' => $request->tagline,
-                'doctor_department' => $request->department,
+                'department_id' => $request->department,
+                'doctor_schedule' => explode (",", $request->schedule),
             ]);
 
-        return redirect()->back()->with('success', 'Doctor Added Successfully');
+        return redirect()->back()->with('success', 'Doctor Updated Successfully');
     }
 
     function deleteDoctor(Request $request)
@@ -68,7 +70,10 @@ class DoctorController extends Controller
     {
         $doctor = User::where('id', $id)->first();
 
-        return view('components.update-doctor-info')->with('doctor', $doctor);
+        return view('components.update-doctor-info')->with([
+            'doctor' => $doctor,
+            'departments' => DB::table('departments')->get(),
+        ]);
     }
 
     function fetchDoctors()
@@ -109,9 +114,17 @@ class DoctorController extends Controller
             'doctor_biography' => $request->biography,
             'doctor_research_interests' => $request->research_interests,
             'doctor_tagline' => $request->tagline,
-            'doctor_department' => $request->department,
+            'department_id' => $request->department,
+            'doctor_schedule' => explode(",", $request->schedule),
         ]);
 
         return redirect()->back()->with('success', 'Doctor Added Successfully');
+    }
+
+    public function view()
+    {
+        $departments = DB::table('departments')->get();
+        
+        return view('components.add-doctor', compact('departments'));
     }
 }

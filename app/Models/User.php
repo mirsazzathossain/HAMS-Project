@@ -43,7 +43,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'doctor_biography',
         'doctor_research_interests',
         'doctor_tagline',
-        'doctor_department',
+        'department_id',
+        'doctor_schedule'
     ];
 
     /**
@@ -69,6 +70,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'doctor_memberships' => 'array',
         'doctor_awards' => 'array',
         'doctor_education' => 'array',
+        'doctor_schedule' => 'array',
     ];
 
     /**
@@ -83,6 +85,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function scopeDoctorFields($query)
     {
         $query->select(
+            'name',
+            'email',
+            'phone',
+            'profile_photo_path',
             'doctor_profession',
             'doctor_speciality',
             'doctor_conditions',
@@ -94,11 +100,23 @@ class User extends Authenticatable implements MustVerifyEmail
             'doctor_biography',
             'doctor_research_interests',
             'doctor_tagline',
+            'department_id',
+            'doctor_schedule'
         );
     }
 
     public function appoinments()
     {
         return $this->hasMany(Appointment::class);
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
     }
 }

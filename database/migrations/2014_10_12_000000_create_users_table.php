@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('address')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('role')->default(0);
+            $table->string('role')->default('patient');
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
@@ -39,7 +39,8 @@ class CreateUsersTable extends Migration
             $table->string('doctor_biography')->nullable();
             $table->string('doctor_research_interests')->nullable();
             $table->string('doctor_tagline')->nullable();
-            $table->string('doctor_department')->nullable();
+            $table->string('department_id')->nullable();
+            $table->json('doctor_schedule')->nullable();
         });
     }
 

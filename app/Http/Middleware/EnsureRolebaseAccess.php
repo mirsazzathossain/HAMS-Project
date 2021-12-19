@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class EnsureAdminAccess
+class EnsureRolebaseAccess
 {
     /**
      * Handle an incoming request.
@@ -14,11 +14,14 @@ class EnsureAdminAccess
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next, ...$roles)
     {
-        if(!$request->user()->isAdmin()) {
+        $userRole = $request->user()->role;
+
+        if (!$userRole || !in_array($userRole, $roles)) {
             return redirect('/');
         }
+
         return $next($request);
     }
 }

@@ -78,7 +78,7 @@
                                         </li>
                                         @if(Auth::user()->role == 'admin' || Auth::user()->role == 'doctor')
                                             <li class="nav-item">
-                                                <a class="{{ request()->is('dashboard.index') ? 'active':'' }}" href="{{ route('dashboard.index') }}">Dashboard</a>
+                                                <a class="{{ request()->is('dashboard') ? 'active':'' }}" href="{{ route('dashboard') }}">Dashboard</a>
                                             </li>
                                         @endif
                                         <li class="nav-item">

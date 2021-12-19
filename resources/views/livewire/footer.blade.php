@@ -10,25 +10,25 @@
                             </a>
                         </div>
                         <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                            {{$hospital['footer_about']}}
                         </p>
                         <ul class="social">
                             <li>
-                                <a href="#" class="line-height: 10 !important;">
+                                <a href="{{$hospital['social_links'][0]}}" class="line-height: 10 !important;">
                                     <i class="bi bi-facebook"></i>
                                 </a>
                             </li>
                             <li>
-                                <a href="#"><i class="bi bi-twitter"></i></a>
+                                <a href="{{$hospital['social_links'][1]}}"><i class="bi bi-twitter"></i></a>
                             </li>
                             <li>
-                                <a href="#"><i class="bi bi-instagram"></i></a>
+                                <a href="{{$hospital['social_links'][2]}}"><i class="bi bi-instagram"></i></a>
                             </li>
                             <li>
-                                <a href="#"><i class="bi bi-linkedin"></i></a>
+                                <a href="{{$hospital['social_links'][3]}}"><i class="bi bi-linkedin"></i></a>
                             </li>
                             <li>
-                                <a href="#"><i class="bi bi-youtube"></i></a>
+                                <a href="{{$hospital['social_links'][4]}}"><i class="bi bi-youtube"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -48,7 +48,7 @@
                                 <ul>
                                      <li><a href="{{ route('login') }}">Login</a></li>
                                     <li><a href="{{ route('register') }}">Register</a></li>
-                                    <li><a href="#">Book Appoinment</a></li>
+                                    <li><a href="{{ route('patient.book-appointment') }}">Book Appoinment</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -58,22 +58,12 @@
                     <div class="single-footer opening-hours">
                         <h3>Opening Hours</h3>
                         <ul>
+                            @foreach ($hospital['opening_hours'] as $schedule)
                             <li>
-                                <span class="day"><i class="bi bi-clock" style="vertical-align: 3px;"></i> Mon - Tue</span>
-                                <span class="time">08:30 - 18:30</span>
+                                <span class="day"><i class="bi bi-clock" style="vertical-align: 3px;"></i> {{ explode(' ', $schedule)[0] }}</span>
+                                <span class="time">{{ explode(' ', $schedule)[1] }}</span>
                             </li>
-                            <li>
-                                <span class="day"><i class="bi bi-clock" style="vertical-align: 3px;"></i> Wed- Thu</span>
-                                <span class="time">08:30 - 18:30</span>
-                            </li>
-                            <li>
-                                <span class="day"><i class="bi bi-clock" style="vertical-align: 3px;"></i> Friday</span>
-                                <span class="time">08:30 - 18:30</span>
-                            </li>
-                            <li>
-                                <span class="day"><i class="bi bi-clock" style="vertical-align: 3px;"></i> Saturday</span>
-                                <span class="time">08:30 - 18:30</span>
-                            </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -83,14 +73,14 @@
                         <ul>
                             <li>
                                 <i class="bi bi-geo-alt" style="line-height: 1px;"></i>
-                                Plot 16, Block B, Aftabuddin Ahmed Road, Bashundhara R/A, Dhaka-1212
+                                {{$hospital['address']}}
                             </li>
                             <li>
-                                <i class="bi bi-telephone" style="line-height: 1px;"></i><a class="color" href="tel:+880 1234-56">Tel:+880 1234-56</a> 
+                                <i class="bi bi-telephone" style="line-height: 1px;"></i><a class="color" href="tel:{{$hospital['phone']}}">Tel:{{$hospital['phone']}}</a> 
                             </li>
                             <li>
                                 <i class="bi bi-envelope" style="line-height: 1px;"></i> Mail.
-                                <a href="mailto:mail@gmail.com">test@gmail.com</a>
+                                <a href="mailto:{{$hospital['email']}}">{{$hospital['email']}}</a>
                             </li>
                         </ul>
                     </div>

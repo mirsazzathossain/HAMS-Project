@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Mail\ContactMailable;
+use App\Models\Hospital;
 use App\Models\Message;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
@@ -22,6 +23,14 @@ class Contact extends Component
         'phone' => 'required',
         'message' => 'required',
     ];
+
+    public $hospital;
+
+    public function mount()
+    {
+        $this->hospital = Hospital::first();
+    }
+    
 
     public function submit()
     {

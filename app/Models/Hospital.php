@@ -14,7 +14,6 @@ class Hospital extends Model
         'address',
         'phone',
         'email',
-        'about',
         'social_links',
         'contact_page_heading',
         'contact_page_details',

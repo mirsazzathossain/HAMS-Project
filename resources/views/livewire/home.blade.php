@@ -7,14 +7,13 @@
                         <div class="hero-text wow fadeInLeft" data-wow-delay=".3s">
 
                             <div class="section-heading">
-                                <h2 class="wow fadeInLeft" data-wow-delay=".3s">Find A Doctor & <br>Book Appointment
+                                <h2 class="wow fadeInLeft" data-wow-delay=".3s">{{explode('&', $hospital['hero_heading'])[0].'&'}} <br>{{explode('&', $hospital['hero_heading'])[1]}}
                                 </h2>
                                 <p class="wow fadeInLeft" data-wow-delay=".5s">
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                                    {{$hospital['hero_details']}}
                                 </p>
                                 <div class="button wow fadeInLeft" data-wow-delay=".7s">
-                                    <a href="#" class="btn">Book Appointment</a>
+                                    <a href="{{route('patient.book-appointment')}}" class="btn">Book Appointment</a>
                                     <a href="{{ route('about-us') }}" class="btn alt">About Us</a>
                                 </div>
                             </div>
@@ -35,48 +34,19 @@
 <section class="how-works">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-4 col-md-4 col-12 p-0">
-                <div class="single-work first">
-                    <div class="main-icon">
-                        <i class="bi bi-window"></i>
+            @for ($x = 0; $x < 3; $x++) 
+                <div class="col-lg-4 col-md-4 col-12 p-0">
+                    <div class="single-work {{$color[$x]}}">
+                        <div class="main-icon">
+                            <i class="bi {{$icon[$x]}}"></i>
+                        </div>
+                        <h3>{{$hospital['home_service_heading'][$x]}}</h3>
+                        <p>
+                            {{$hospital['home_service_details'][$x]}}
+                        </p>
                     </div>
-                    <h3>Best Monitoring System</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet, 
-                        consectetur adipiscing elit, 
-                        sed do eiusmod tempor incididunt 
-                        ut labore et dolore magna aliqua.
-                    </p>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-12 p-0">
-                <div class="single-work middle">
-                    <div class="main-icon">
-                        <i class="bi bi-house-door"></i>
-                    </div>
-                    <h3>Advanced Operating Room</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet, 
-                        consectetur adipiscing elit, 
-                        sed do eiusmod tempor incididunt 
-                        ut labore et dolore magna aliqua.
-                    </p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-12 p-0">
-                <div class="single-work last">
-                    <div class="main-icon">
-                        <i class="bi bi-briefcase"></i>
-                    </div>
-                    <h3>Only Best Doctors</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet, 
-                        consectetur adipiscing elit, 
-                        sed do eiusmod tempor incididunt 
-                        ut labore et dolore magna aliqua.
-                    </p>
-                </div>
-            </div>
+            @endfor
         </div>
     </div>
 </section>
@@ -88,118 +58,43 @@
                 <div class="section-title">
                     <h3>Doctors</h3>
                     <h2 class="wow fadeInUp" data-wow-delay=".4s">
-                        Our Outstanding Team Is Active To Help You!
+                        {{$hospital['home_team_heading']}}
                     </h2>
                     <p class="wow fadeInUp" data-wow-delay=".6s">
-                        There are many variations of passages of Lorem
-                        Ipsum available,
-                        but the majority have suffered alteration in
-                        some form.
+                        {{$hospital['home_team_details']}}
                     </p>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-3 col-md-6 col-12">
-                <div class="single-doctor wow fadeInUp" data-wow-delay=".2s">
-                    <div class="image">
-                        <img src="{{ asset('images/doctors/doctor1.jpg') }}" alt="#" />
-                        <ul class="social">
-                            <li>
-                                <a href="javascript:void(0)"><i class="bi bi-facebook"></i></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"><i class="bi bi-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"><i class="bi bi-instagram"></i></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"><i class="bi bi-youtube"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="content">
-                        <h5>Cardiologist</h5>
-                        <h3><a href="doctor-details.html">Dr.Felica Queen</a></h3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12">
-                <div class="single-doctor wow fadeInUp" data-wow-delay=".4s">
-                    <div class="image">
-                        <img src="{{ asset('images/doctors/doctor2.jpg') }}" alt="#" />
-                        <ul class="social">
-                            <li>
-                                <a href="javascript:void(0)"><i class="bi bi-facebook"></i></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"><i class="bi bi-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"><i class="bi bi-instagram"></i></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"><i class="bi bi-youtube"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="content">
-                        <h5>Neurologist</h5>
-                        <h3><a href="doctor-details.html">Dr.Alice Williams</a></h3>
+            @foreach ($doctors as $doctor)
+
+                <div class="col-lg-3 col-md-6 col-12">
+                    <div class="single-doctor wow fadeInUp" data-wow-delay=".2s">
+                        <div class="image">
+                            <img src="{{ asset('images/'.$doctor['profile_photo_path']) }}" alt="{{$doctor['name']}}" />
+                            <ul class="social">
+                                <li>
+                                    <a target="blank" href="{{$doctor['social_links'][0]}}"><i class="bi bi-facebook"></i></a>
+                                </li>
+                                <li>
+                                    <a target="blank" href="{{$doctor['social_links'][1]}}"><i class="bi bi-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a target="blank" href="{{$doctor['social_links'][2]}}"><i class="bi bi-instagram"></i></a>
+                                </li>
+                                <li>
+                                    <a target="blank" href="{{$doctor['social_links'][3]}}"><i class="bi bi-youtube"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="content">
+                            <h5>{{$doctor['doctor_profession']}}</h5>
+                            <h3><a href="{{route('doctor.details', $doctor['id'])}}">Dr.{{$doctor['name']}}</a></h3>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12">
-                <div class="single-doctor wow fadeInUp" data-wow-delay=".6s">
-                    <div class="image">
-                        <img src="{{ asset('images/doctors/doctor3.jpg') }}" alt="#" />
-                        <ul class="social">
-                            <li>
-                                <a href="javascript:void(0)"><i class="bi bi-facebook"></i></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"><i class="bi bi-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"><i class="bi bi-instagram"></i></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"><i class="bi bi-youtube"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="content">
-                        <h5>Physician Assistant</h5>
-                        <h3><a href="doctor-details.html">Dr.Paul Flavius</a></h3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12">
-                <div class="single-doctor wow fadeInUp" data-wow-delay=".8s">
-                    <div class="image">
-                        <img src="{{ asset('images/doctors/doctor4.jpg') }}" alt="#" />
-                        <ul class="social">
-                            <li>
-                                <a href="javascript:void(0)"><i class="bi bi-facebook"></i></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"><i class="bi bi-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"><i class="bi bi-instagram"></i></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"><i class="bi bi-youtube"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="content">
-                        <h5>Physician Assistant</h5>
-                        <h3><a href="doctor-details.html">Dr.Michael Bean</a></h3>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>

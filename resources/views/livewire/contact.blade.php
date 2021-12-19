@@ -7,10 +7,9 @@
                 <div class="col-12">
                     <div class="section-title">
                         <h3>Contact</h3>
-                        <h2 class="wow fadeInUp" data-wow-delay=".4s">We’re connected all time to help our patients
+                        <h2 class="wow fadeInUp" data-wow-delay=".4s">{{$hospital['contact_page_heading']}}
                         </h2>
-                        <p class="wow fadeInUp" data-wow-delay=".6s">There are many variations of passages of Lorem
-                            Ipsum available, but the majority have suffered alteration in some form.</p>
+                        <p class="wow fadeInUp" data-wow-delay=".6s">{{$hospital['contact_page_details']}}</p>
                     </div>
                 </div>
             </div>
@@ -92,7 +91,7 @@
                             </div>
                             <h3>Medical Address</h3>
                             <ul>
-                                <li>3909 Witmer Rd, Niagara Falls, NY 14305, United States</li>
+                                <li>{{$hospital['address']}}/li>
                             </ul>
                         </div>
                         <div class="single-info">
@@ -100,9 +99,11 @@
                                 <i class="bi bi-clock"></i>
                             </div>
                             <h3>Opening hours</h3>
+                            
                             <ul>
-                                <li>Mon - Tue 08:30 - 18:30</li>
-                                <li>Wed- Thu 07:00 - 14:30</li>
+                                @foreach ($hospital['opening_hours'] as $schedule)
+                                <li>{{$schedule}}</li>
+                                @endforeach
                             </ul>
                         </div>
                         <div class="single-info">
@@ -111,7 +112,7 @@
                             </div>
                             <h3>Email Support</h3>
                             <ul>
-                                <li><a href="mailto:medicapps@gmail.com">test@gmail.com</a></li>
+                                <li><a href="mailto:medicapps@gmail.com">{{$hospital['email']}}</a></li>
                             </ul>
                         </div>
                         <div class="single-info contact-social">
@@ -120,11 +121,11 @@
                                 <i class="bi bi-phone"></i>
                             </div>
                             <ul>
-                                <li><a href=""><i class="bi bi-facebook"></i></a></li>
-                                <li><a href=""><i class="bi bi-twitter"></i></a></li>
-                                <li><a href=""><i class="bi bi-linkedin"></i></a></li>
-                                <li><a href=""><i class="bi bi-pinterest"></i></a></li>
-                                <li><a href=""><i class="bi bi-youtube"></i></a></li>
+                                <li><a href="{{$hospital['social_links'][0]}}"><i class="bi bi-facebook"></i></a></li>
+                                <li><a href="{{$hospital['social_links'][1]}}"><i class="bi bi-twitter"></i></a></li>
+                                <li><a href="{{$hospital['social_links'][2]}}"><i class="bi bi-linkedin"></i></a></li>
+                                <li><a href="{{$hospital['social_links'][3]}}"><i class="bi bi-pinterest"></i></a></li>
+                                <li><a href="{{$hospital['social_links'][4]}}"><i class="bi bi-youtube"></i></a></li>
                             </ul>
                         </div>
                     </div>

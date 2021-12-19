@@ -45,15 +45,15 @@ class DoctorController extends Controller
                 'doctor_speciality' => $request->speciality,
                 'doctor_conditions' => $request->conditions,
                 'doctor_experience' => $request->experience,
-                'social_links' => explode (",", $request->social_links),
-                'doctor_memberships' => explode (",", $request->doctor_memberships),
-                'doctor_awards' => explode (",", $request->doctor_awards),
-                'doctor_education' => explode (",", $request->doctor_education),
+                'social_links' => explode (", ", $request->social_links),
+                'doctor_memberships' => explode (", ", $request->doctor_memberships),
+                'doctor_awards' => explode (", ", $request->doctor_awards),
+                'doctor_education' => explode (", ", $request->doctor_education),
                 'doctor_biography' => $request->biography,
                 'doctor_research_interests' => $request->research_interests,
                 'doctor_tagline' => $request->tagline,
                 'department_id' => $request->department,
-                'doctor_schedule' => explode (",", $request->schedule),
+                'doctor_schedule' => explode (", ", $request->schedule),
             ]);
 
         return redirect()->back()->with('success', 'Doctor Updated Successfully');
@@ -107,15 +107,15 @@ class DoctorController extends Controller
             'doctor_speciality' => $request->speciality,
             'doctor_conditions' => $request->conditions,
             'doctor_experience' => $request->experience,
-            'social_links' => explode (",", $request->social_links),
-            'doctor_memberships' => explode (",", $request->doctor_memberships),
-            'doctor_awards' => explode (",", $request->doctor_awards),
-            'doctor_education' => explode (",", $request->doctor_education),
+            'social_links' => explode (", ", $request->social_links),
+            'doctor_memberships' => explode (", ", $request->doctor_memberships),
+            'doctor_awards' => explode (", ", $request->doctor_awards),
+            'doctor_education' => explode (", ", $request->doctor_education),
             'doctor_biography' => $request->biography,
             'doctor_research_interests' => $request->research_interests,
             'doctor_tagline' => $request->tagline,
             'department_id' => $request->department,
-            'doctor_schedule' => explode(",", $request->schedule),
+            'doctor_schedule' => explode(", ", $request->schedule),
         ]);
 
         return redirect()->back()->with('success', 'Doctor Added Successfully');

@@ -10,12 +10,9 @@
             <div class="col-lg-6 col-md-12 col-12">
                 <div class="content-right">
                     <span class="sub-heading">About</span>
-                    <h2>Thousands of specialities for any type diagnostic.</h2>
+                    <h2>{{$hospital['about_page_heading']}}</h2>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                        eius mod tempor incididunt ut labore et dolore magna aliqua. Ut
-                        enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                        nisi aliquip ex ea commodo consequat.
+                        {{$hospital['about_page_details']}}
                     </p>
                     <div class="button">
                         <a href="{{ route('contact') }}" class="btn">Contact Us</a>

@@ -8,11 +8,11 @@
                             <ul>
                                 <li>
                                     <i class="bi bi-envelope" style="vertical-align: 2px;"></i>
-                                    <a href="mailto:mail@gmail.com">test@gmail.com</a>
+                                    <a href="mailto:{{$hospital['email']}}">{{$hospital['email']}}</a>
                                 </li>
                                 <li>
                                     <i class="bi bi-telephone" style="vertical-align: 2px;"></i> 
-                                    <a class="color" href="tel:+880 140000-0000">Tel: +880 1234-56</a> 
+                                    <a class="color" href="tel:{{$hospital['phone']}}">Tel: {{$hospital['phone']}}</a> 
                                 </li>
                             </ul>
                         </div>
@@ -22,16 +22,16 @@
                             <div class="top-social">
                                 <ul>
                                     <li>
-                                        <a href="#"><i class="bi bi-facebook"></i></a>
+                                        <a href="{{$hospital['social_links'][0]}}"><i class="bi bi-facebook"></i></a>
                                     </li>
                                     <li>
-                                        <a href="#"><i class="bi bi-twitter"></i></a>
+                                        <a href="{{$hospital['social_links'][1]}}"><i class="bi bi-twitter"></i></a>
                                     </li>
                                     <li>
-                                        <a href="#"><i class="bi bi-instagram"></i></a>
+                                        <a href="{{$hospital['social_links'][2]}}"><i class="bi bi-instagram"></i></a>
                                     </li>
                                     <li>
-                                        <a href="#"><i class="bi bi-youtube"></i></a>
+                                        <a href="{{$hospital['social_links'][4]}}"><i class="bi bi-youtube"></i></a>
                                     </li>
                                 </ul>
                             </div>

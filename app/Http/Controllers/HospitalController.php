@@ -93,13 +93,12 @@ class HospitalController extends Controller
         ]);
 
         if(!empty($request->hero_image)){
-            $image = time().'-'.$request->hero_image.'.'.$request->hero_image->getClientOriginalExtension();
+            $image = time().'.'.$request->hero_image->getClientOriginalExtension();
             $request->hero_image->move(public_path('images'), $image);
 
-            Hospital::where('id', $request->id)
-                ->update([
-                    'hero_image' => $image,
-                ]);
+            $hospital = Hospital::find($id);
+            $hospital->hero_image = $image;
+            $hospital->save();
         }
 
         $hospital = Hospital::find($id);

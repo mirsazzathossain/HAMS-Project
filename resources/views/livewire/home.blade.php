@@ -22,7 +22,7 @@
                     </div>
                     <div class="col-lg-6 col-md-12 col-12">
                         <div class="hero-image wow fadeInRight" data-wow-delay=".5s">
-                            <img src="{{ asset('images/02.png') }}" alt="#">
+                            <img src="{{ asset('images/'.$hospital['hero_image']) }}" alt="#">
                         </div>
                     </div>
                 </div>
